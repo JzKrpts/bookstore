@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user_model
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.urls import reverse
 
 
@@ -33,6 +33,12 @@ class CustomUserTests(TestCase):
         self.assertTrue(admin_user.is_superuser)
 
 
+@override_settings(
+    SECURE_SSL_REDIRECT=False,
+    SESSION_COOKIE_SECURE=False,
+    CSRF_COOKIE_SECURE=False,
+    SECURE_HSTS_SECONDS=0,
+)
 class SignupPageTests(TestCase):
     username = "newuser"
     email = "newuser@email.com"

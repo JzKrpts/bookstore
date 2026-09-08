@@ -1,10 +1,16 @@
 from django.core.cache import cache
-from django.test import SimpleTestCase
+from django.test import SimpleTestCase, override_settings
 from django.urls import resolve, reverse
 
 from .views import AboutPageView, HomePageView
 
 
+@override_settings(
+    SECURE_SSL_REDIRECT=False,
+    SESSION_COOKIE_SECURE=False,
+    CSRF_COOKIE_SECURE=False,
+    SECURE_HSTS_SECONDS=0,
+)
 class HomepageTests(SimpleTestCase):
     def setUp(self):
         cache.clear()
@@ -35,6 +41,12 @@ class HomepageTests(SimpleTestCase):
         self.assertEqual(view.func.__name__, HomePageView.as_view().__name__)
 
 
+@override_settings(
+    SECURE_SSL_REDIRECT=False,
+    SESSION_COOKIE_SECURE=False,
+    CSRF_COOKIE_SECURE=False,
+    SECURE_HSTS_SECONDS=0,
+)
 class AboutPageTests(SimpleTestCase):
     def setUp(self):
         cache.clear()

@@ -22,7 +22,7 @@ from django.urls import include, path
 
 urlpatterns = [
     # Django admin
-    path("admin/", admin.site.urls),
+    path("notadminlol/", admin.site.urls),
     # User Management
     path("accounts/", include("allauth.urls")),
     # Local Apps

@@ -1,11 +1,17 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Permission
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.urls import reverse
 
 from .models import Book, Review
 
 
+@override_settings(
+    SECURE_SSL_REDIRECT=False,
+    SESSION_COOKIE_SECURE=False,
+    CSRF_COOKIE_SECURE=False,
+    SECURE_HSTS_SECONDS=0,
+)
 class BookTests(TestCase):
     @classmethod
     def setUpTestData(cls):
@@ -16,7 +22,7 @@ class BookTests(TestCase):
         )
 
         cls.special_permission = Permission.objects.get(
-            codename = "special_status",
+            codename="special_status",
         )
 
         cls.book = Book.objects.create(

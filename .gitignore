@@ -24,6 +24,7 @@ local_settings.py
 Thumbs.db
 .vscode/
 .idea/
+docker-compose-prod.yml
 
 # Python build & Distributions
 *.egg-info/
