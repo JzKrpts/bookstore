@@ -76,6 +76,8 @@ DEFAULT_FROM_EMAIL = "admin@djangobookstore.com"
 MIDDLEWARE = [
     # Debug Toolbar (High as possible but after encoding/gzip)
     "debug_toolbar.middleware.DebugToolbarMiddleware",
+    # Update Cache
+    "django.middleware.cache.UpdateCacheMiddleware",
     # Security & Sessions
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -88,7 +90,14 @@ MIDDLEWARE = [
     "allauth.account.middleware.AccountMiddleware",
     # Clickjacking protection
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    # Fetch Cache
+    "django.middleware.cache.FetchFromCacheMiddleware",
 ]
+
+# Cache
+CACHE_MIDDLEWARE_ALIAS = "default"
+CACHE_MIDDLEWARE_SECONDS = 604800
+CACHE_MIDDLEWARE_KEY_PREFIX = ""
 
 ROOT_URLCONF = "config.urls"
 
